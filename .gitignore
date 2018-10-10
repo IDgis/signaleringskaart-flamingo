@@ -1,0 +1,6 @@
+# Eclipse
+.project
+
+# Intellij
+.idea/
+*.iml
