@@ -6,7 +6,7 @@ RUN apt-get update && \
         curl \
         gettext \
         openjdk-8-jre \
-        tomcat 8 && \
+        tomcat8 && \
     rm -rf /var/lib/apt/lists/*
 
 # Prepare tomcat environment for Flamingo
