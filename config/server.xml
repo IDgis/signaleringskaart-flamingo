@@ -6,9 +6,7 @@
   The ASF licenses this file to You under the Apache License, Version 2.0
   (the "License"); you may not use this file except in compliance with
   the License.  You may obtain a copy of the License at
-
       http://www.apache.org/licenses/LICENSE-2.0
-
   Unless required by applicable law or agreed to in writing, software
   distributed under the License is distributed on an "AS IS" BASIS,
   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -52,7 +50,7 @@
                 password="${FLAMINGO_PASSWORD}"
                 driverClassName="org.postgresql.Driver"
                 url="jdbc:postgresql://${PG_HOST}:${PG_PORT}/${FLAMINGO_DB}"
-                maxActive="40"
+                maxTotal="40"
                 validationQuery="select 1"
                 timeBetweenEvictionRunsMillis="30000"
                 minEvictableIdleTimeMillis="5000"
@@ -135,6 +133,20 @@
 
             <Host name="localhost" copyXML="true" appBase="webapps"
                   unpackWARs="true" autoDeploy="true">
+                <!--
+                <Context path="/viewer-admin">
+                    <Parameter name="flamingo.data.dir" value="/opt/flamingo_data" override="false"/>
+                    <Parameter name="flamingo.solr.url" value="http://${SOLR_URL}/solr/" override="false"/>
+                    <Parameter name="flamingo.solr.schedule" value="0 1 * ? * *" override="false"/>
+                    <Parameter name="flamingo.solr.setup" value="true" override="false"/>
+                </Context>
+                <Context path="/viewer">
+                    <Parameter name="flamingo.data.dir" value="/opt/flamingo_data" override="false"/>
+                    <Parameter name="flamingo.solr.url" value="http://${SOLR_URL}/solr/" override="false"/>
+                    <Parameter name="flamingo.solr.schedule" value="0 1 * ? * *" override="false"/>
+                    <Parameter name="flamingo.solr.setup" value="false" override="false"/>
+                </Context>
+                -->
 
                 <!-- SingleSignOn valve, share authentication between web applications
                      Documentation at: /docs/config/valve.html -->
