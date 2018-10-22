@@ -6,7 +6,8 @@ RUN apt-get update && \
         curl \
         gettext \
         openjdk-8-jre \
-        tomcat8 && \
+        tomcat8 \
+        unzip && \
     rm -rf /var/lib/apt/lists/*
 
 # Prepare tomcat environment for Flamingo
@@ -19,23 +20,24 @@ RUN mkdir -p /usr/share/tomcat8/lib && \
 
 # Replace tomcat configuration
 COPY config/* /opt/
+COPY libs/* /usr/share/tomcat8/lib/
 
 # Download Flamingo
 RUN curl "http://central.maven.org/maven2/com/sun/mail/javax.mail/1.5.2/javax.mail-1.5.2.jar" > /usr/share/tomcat8/lib/javax.mail-1.5.2.jar && \
     curl "http://central.maven.org/maven2/postgresql/postgresql/9.1-901.jdbc4/postgresql-9.1-901.jdbc4.jar" > /usr/share/tomcat8/lib/postgresql-9.1-901.jdbc4.jar && \
-    curl "http://central.maven.org/maven2/org/apache/solr/solr/4.9.1/solr-4.9.1.war" > /opt/flamingo_data/solr.war && \
+    curl "https://archive.apache.org/dist/lucene/solr/4.9.1/solr-4.9.1.zip" > /opt/solr-4.9.1.zip && \
     mkdir -p /usr/share/tomcat8/webapps/ && \
     curl "http://repo.b3p.nl/nexus/content/repositories/releases/org/flamingo-mc/viewer/4.8.0/viewer-4.8.0.war" > /usr/share/tomcat8/webapps/viewer.war && \
     curl "http://repo.b3p.nl/nexus/content/repositories/releases/org/flamingo-mc/viewer-admin/4.8.0/viewer-admin-4.8.0.war" > /usr/share/tomcat8/webapps/viewer-admin.war
 
-EXPOSE 8080 8009
+RUN unzip /opt/solr-4.9.1.zip && \
+    cp -r /solr-4.9.1/dist/ /opt/ && \
+    cp -r /solr-4.9.1/contrib/ /opt/ && \
+    cp -r /solr-4.9.1/example/lib/ext/ /usr/share/tomcat8/lib/ && \
+    cp -r /solr-4.9.1/example/resources/ /usr/share/tomcat8/lib/ && \
+    rm -r /solr-4.9.1
 
-# Default environment
-ENV SERVICE_IDENTIFICATION="flamingo" \
-    SERVICE_DOMAIN="localhost" \
-    SERVICE_AJP_PORT="8009" \
-    SERVICE_HTTP_PORT="8080" \
-    SERVICE_PATH="/"
+EXPOSE 8080 8009
 
 COPY start.sh /opt/
 RUN chown -R tomcat8:tomcat8 /usr/share/tomcat8/ && \
