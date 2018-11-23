@@ -33,27 +33,37 @@
     <ResourceLink global="mail/session" name="mail/session" type="javax.mail.Session"/>
     <!-- use LockoutRealm instead of CombinedRealm to prevent brute-forcing -->
     <Realm className="org.apache.catalina.realm.LockOutRealm">
-        <Realm className="org.apache.catalina.realm.DataSourceRealm"
+        <!-- Realm className="org.apache.catalina.realm.DataSourceRealm"
                dataSourceName="jdbc/geo_viewer" allRolesMode="authOnly"
                userTable="user_" userNameCol="username" userCredCol="password"
                userRoleTable="user_groups" roleNameCol="group_">
             <CredentialHandler className="org.apache.catalina.realm.MessageDigestCredentialHandler"
                                algorithm="SHA-1" iterations="1" saltLength="0" encoding="UTF-8"/>
-        </Realm>
+        </Realm -->
         <!-- Use JNDIRealm for authenticating against a LDAP server (such as
                  Active Directory):
                  http://tomcat.apache.org/tomcat-8.0-doc/config/realm.html
                  http://tomcat.apache.org/tomcat-8.0-doc/realm-howto.html#JNDIRealm
             -->
-        <!--Realm className="org.apache.catalina.realm.JNDIRealm"
-                allRolesMode="authOnly"
-                connectionURL="ldap://ldap:389"
-                connectionName="cn=ServiceUser,ou=Services,o=MyOrg"
-                connectionPassword=""
-                userBase="o=MyOrg"
-                userSubtree="true"
-                userSearch="cn={0}"
-                commonRole="ExtendedUser"
-            /-->
+
+        <!-- LDAP_USERBASE bijvoorbeeld "ou=users,dc=ev-signaleringskaart,dc=nl" -->
+        <!-- LDAP_ROLEBASE bijvoorbeeld "ou=roles,dc=ev-signaleringskaart,dc=nl" -->
+        <Realm className="org.apache.catalina.realm.JNDIRealm"
+               allRolesMode="authOnly"
+
+               connectionURL="ldap://${LDAP_HOST}:389"
+               connectionName="${LDAP_CONNECTIONNAME}"
+               connectionPassword="${LDAP_CONNECTIONPASSWORD}"
+
+               userBase="${LDAP_USERBASE}"
+               userSubtree="true"
+               userSearch="(mail={0})"
+
+               roleBase="${LDAP_ROLEBASE}"
+               roleName="cn"
+               roleSearch="(uniqueMember={0})"
+
+               commonRole="ExtendedUser"
+            />
     </Realm>
 </Context>
