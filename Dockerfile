@@ -22,18 +22,13 @@ RUN mkdir -p /usr/share/tomcat8/lib && \
 # Replace tomcat configuration
 COPY config/* /opt/
 
-RUN mkdir -p /usr/share/tomcat8/webapps/
-COPY wars/viewer-4.8.0.war /usr/share/tomcat8/webapps/viewer.war
-COPY wars/viewer-admin-4.8.0.war /usr/share/tomcat8/webapps/viewer-admin.war
-
 # Download Flamingo
 RUN curl "http://central.maven.org/maven2/com/sun/mail/javax.mail/1.5.2/javax.mail-1.5.2.jar" > /usr/share/tomcat8/lib/javax.mail-1.5.2.jar && \
     curl "http://central.maven.org/maven2/postgresql/postgresql/9.1-901.jdbc4/postgresql-9.1-901.jdbc4.jar" > /usr/share/tomcat8/lib/postgresql-9.1-901.jdbc4.jar && \
     curl "https://archive.apache.org/dist/lucene/solr/4.9.1/solr-4.9.1.zip" > /opt/solr-4.9.1.zip && \
-    unzip -d /usr/share/tomcat8/webapps/viewer /usr/share/tomcat8/webapps/viewer.war && \
-    unzip -d /usr/share/tomcat8/webapps/viewer-admin /usr/share/tomcat8/webapps/viewer-admin.war && \
-    rm /usr/share/tomcat8/webapps/viewer.war && \
-    rm /usr/share/tomcat8/webapps/viewer-admin.war
+    mkdir -p /usr/share/tomcat8/webapps/ && \
+    curl "https://repo.b3p.nl/nexus/content/repositories/releases/org/flamingo-mc/viewer/5.2.1/viewer-5.2.1.war" > /usr/share/tomcat8/webapps/viewer.war && \
+    curl "https://repo.b3p.nl/nexus/content/repositories/releases/org/flamingo-mc/viewer-admin/5.2.1/viewer-admin-5.2.1.war" > /usr/share/tomcat8/webapps/viewer-admin.war
 
 RUN unzip /opt/solr-4.9.1.zip && \
     cp -r /solr-4.9.1/dist/ /opt/ && \
