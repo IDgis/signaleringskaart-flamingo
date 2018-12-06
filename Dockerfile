@@ -7,6 +7,10 @@ RUN apt-get update && \
         gettext \
         openjdk-8-jre \
         tomcat8 \
+        tomcat8-admin \
+        tomcat8-common \
+        tomcat8-docs \
+        tomcat8-user \
         unzip && \
     rm -rf /var/lib/apt/lists/*
 
@@ -14,9 +18,11 @@ RUN apt-get update && \
 RUN mkdir -p /usr/share/tomcat8/lib && \
     mkdir -p /usr/share/tomcat8/conf && \
     mkdir -p /usr/share/tomcat8/conf/Catalina/localhost && \
+    mkdir -p /usr/share/tomcat8/webapps && \
     mkdir -p /opt/flamingo_data && \
     mkdir -p /logs && \
     cp -R /var/lib/tomcat8/conf/* /usr/share/tomcat8/conf/ && \
+    cp -R /var/lib/tomcat8/webapps/* /usr/share/tomcat8/webapps/ && \
     ln -s /tmp /usr/share/tomcat8/temp
 
 # Replace tomcat configuration
