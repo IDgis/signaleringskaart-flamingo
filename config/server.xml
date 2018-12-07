@@ -50,7 +50,7 @@
                 password="${FLAMINGO_PASSWORD}"
                 driverClassName="org.postgresql.Driver"
                 url="jdbc:postgresql://${PG_HOST}:${PG_PORT}/${FLAMINGO_DB}"
-                maxTotal="40"
+                maxTotal="200"
                 validationQuery="select 1"
                 timeBetweenEvictionRunsMillis="30000"
                 minEvictableIdleTimeMillis="5000"
@@ -80,6 +80,7 @@
         -->
         <Connector port="8080" protocol="HTTP/1.1"
                    connectionTimeout="20000"
+                   maxThreads="100"
                    redirectPort="8443" />
         <!-- A "Connector" using the shared thread pool-->
         <!--
