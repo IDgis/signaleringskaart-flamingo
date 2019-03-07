@@ -11,7 +11,8 @@ RUN apt-get update && \
         tomcat8-common \
         tomcat8-docs \
         tomcat8-user \
-        unzip && \
+        unzip \
+        zip && \
     rm -rf /var/lib/apt/lists/*
 
 # Prepare tomcat environment for Flamingo
@@ -27,6 +28,7 @@ RUN mkdir -p /usr/share/tomcat8/lib && \
 
 # Replace tomcat configuration
 COPY config/* /opt/
+COPY web /opt/
 
 # Download Flamingo
 RUN curl "http://central.maven.org/maven2/com/sun/mail/javax.mail/1.5.2/javax.mail-1.5.2.jar" > /usr/share/tomcat8/lib/javax.mail-1.5.2.jar && \
@@ -35,6 +37,15 @@ RUN curl "http://central.maven.org/maven2/com/sun/mail/javax.mail/1.5.2/javax.ma
     mkdir -p /usr/share/tomcat8/webapps/ && \
     curl "https://repo.b3p.nl/nexus/content/repositories/releases/org/flamingo-mc/viewer/5.2.1/viewer-5.2.1.war" > /usr/share/tomcat8/webapps/viewer.war && \
     curl "https://repo.b3p.nl/nexus/content/repositories/releases/org/flamingo-mc/viewer-admin/5.2.1/viewer-admin-5.2.1.war" > /usr/share/tomcat8/webapps/viewer-admin.war
+
+RUN unzip -d /opt/viewer /usr/share/tomcat8/webapps/viewer.war && \
+    cp /opt/login.jsp /opt/viewer/ && \
+    cp /opt/ev_sk_splash.jpg /opt/viewer/resources/images/ && \
+    cd /opt/viewer && \
+    zip -r /opt/viewer.zip . && \
+    cp /opt/viewer.zip /usr/share/tomcat8/webapps/viewer.war && \
+    rm /opt/viewer.zip && \
+    rm -rf /opt/viewer
 
 RUN unzip /opt/solr-4.9.1.zip && \
     cp -r /solr-4.9.1/dist/ /opt/ && \
