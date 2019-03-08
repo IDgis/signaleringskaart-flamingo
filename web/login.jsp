@@ -30,17 +30,15 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
       .panel-centered {
         position: absolute;
         width: 300px;
-        height: 250px;
-        left: 50%;
-        top: 50%;
-        margin-left: -150px;
-        margin-top: -125px;
+        height: 225px;
+        left: 15px;
+        top: 200px;
+        font-family: 'Open Sans', 'Helvetica Neue', helvetica, arial, verdana, sans-serif;
       }
       .panel-default {
         border-color: #eaeff0;
       }
       .panel {
-        margin-bottom: 20px;
         background-color: #fff;
         border: 1px solid transparent;
         border-color: #eaeff0;
