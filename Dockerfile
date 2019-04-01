@@ -40,6 +40,7 @@ RUN curl "http://central.maven.org/maven2/com/sun/mail/javax.mail/1.5.2/javax.ma
 
 RUN unzip -d /opt/viewer /usr/share/tomcat8/webapps/viewer.war && \
     cp /opt/login.jsp /opt/viewer/ && \
+    cp /opt/change-password.html /opt/viewer/ && \
     cp /opt/ev_sk_splash.jpg /opt/viewer/resources/images/ && \
     cd /opt/viewer && \
     zip -r /opt/viewer.zip . && \
