@@ -12,6 +12,14 @@ RUN curl -L "https://github.com/flamingo-geocms/flamingo/archive/v5.2.1.zip" > /
     && cp /opt/web/login.jsp /opt/flamingo/flamingo-5.2.1/viewer/src/main/webapp/ \
     && cp /opt/web/ev_sk_splash.jpg /opt/flamingo/flamingo-5.2.1/viewer/src/main/webapp/resources/images/ \
     && cp /opt/web/logo.png /opt/flamingo/flamingo-5.2.1/viewer/src/main/webapp/WEB-INF/xsl/print/ \
+    && cp /opt/web/A0_Landscape.xsl /opt/flamingo/flamingo-5.2.1/viewer/src/main/webapp/WEB-INF/xsl/print/ \
+    && cp /opt/web/A0_Portrait.xsl /opt/flamingo/flamingo-5.2.1/viewer/src/main/webapp/WEB-INF/xsl/print/ \
+    && cp /opt/web/A3_Landscape.xsl /opt/flamingo/flamingo-5.2.1/viewer/src/main/webapp/WEB-INF/xsl/print/ \
+    && cp /opt/web/A3_Portrait.xsl /opt/flamingo/flamingo-5.2.1/viewer/src/main/webapp/WEB-INF/xsl/print/ \
+    && cp /opt/web/A4_Landscape.xsl /opt/flamingo/flamingo-5.2.1/viewer/src/main/webapp/WEB-INF/xsl/print/ \
+    && cp /opt/web/A4_Portrait.xsl /opt/flamingo/flamingo-5.2.1/viewer/src/main/webapp/WEB-INF/xsl/print/ \
+    && cp /opt/web/A5_Landscape.xsl /opt/flamingo/flamingo-5.2.1/viewer/src/main/webapp/WEB-INF/xsl/print/ \
+    && cp /opt/web/A5_Portrait.xsl /opt/flamingo/flamingo-5.2.1/viewer/src/main/webapp/WEB-INF/xsl/print/ \
     && touch /opt/flamingo/flamingo-5.2.1/viewer-admin/src/main/resources/git.properties \
     && mkdir /opt/flamingo/flamingo-5.2.1/viewer/src/main/resources \
     && touch /opt/flamingo/flamingo-5.2.1/viewer/src/main/resources/git.properties \
