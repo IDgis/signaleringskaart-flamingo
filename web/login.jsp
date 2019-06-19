@@ -22,18 +22,48 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     <meta name="teststring" content="<title>Inloggen</title>">
     <title>Inloggen</title>
     <style>
-      body {
-        background-image: url("../resources/images/ev_sk_splash.jpg");
-        background-repeat: no-repeat;
-        background-size: cover;
+      html {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
       }
-      .panel-centered {
-        position: absolute;
-        width: 300px;
-        height: 225px;
-        left: 15px;
-        top: 200px;
-        font-family: 'Open Sans', 'Helvetica Neue', helvetica, arial, verdana, sans-serif;
+      @media screen and (max-width: 1375px) {
+        body {
+          margin: 0;
+          background-image: url("../resources/images/ev_sk_splash.jpg");
+          background-repeat: no-repeat;
+          background-size: contain;
+          width: 100%;
+          height: 0;
+          padding-top: 70.17%; /* (img-height / img-width * container-width) => (1343 / 1914 * 100) */
+        }
+        .panel-centered {
+          position: absolute;
+          width: 300px;
+          height: 225px;
+          left: 20px;
+          top: 12vw;
+          font-family: 'Open Sans', 'Helvetica Neue', helvetica, arial, verdana, sans-serif;
+        }
+      }
+      @media screen and (min-width: 1375px) {
+        body {
+          margin: 0;
+          background-image: url("../resources/images/ev_sk_splash.jpg");
+          background-repeat: no-repeat;
+          background-size: contain;
+          background-position-x: center;
+          width: 100%;
+          height: 100%;
+        }
+        .panel-centered {
+          position: absolute;
+          width: 300px;
+          height: 225px;
+          left: calc((100vw - 1335px) / 2);
+          top: 164px;
+          font-family: 'Open Sans', 'Helvetica Neue', helvetica, arial, verdana, sans-serif;
+        }
       }
       .panel-default {
         border-color: #eaeff0;

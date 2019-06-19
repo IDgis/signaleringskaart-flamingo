@@ -1,9 +1,31 @@
-FROM ubuntu:18.04 as builder
+FROM ubuntu:18.04 as metrics
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
         curl \
     && rm -rf /var/lib/apt/lists/*
 RUN curl "http://central.maven.org/maven2/io/prometheus/jmx/jmx_prometheus_javaagent/0.11.0/jmx_prometheus_javaagent-0.11.0.jar" > /opt/jmx_prometheus_javaagent.jar
+
+FROM maven:3.6-jdk-8 as builder
+COPY web /opt/web
+RUN curl -L "https://github.com/flamingo-geocms/flamingo/archive/v5.2.1.zip" > /opt/flamingo.zip \
+    && unzip -d /opt/flamingo /opt/flamingo.zip \
+    && cp /opt/web/login.jsp /opt/flamingo/flamingo-5.2.1/viewer/src/main/webapp/ \
+    && cp /opt/web/ev_sk_splash.jpg /opt/flamingo/flamingo-5.2.1/viewer/src/main/webapp/resources/images/ \
+    && cp /opt/web/logo.png /opt/flamingo/flamingo-5.2.1/viewer/src/main/webapp/WEB-INF/xsl/print/ \
+    && cp /opt/web/A0_Landscape.xsl /opt/flamingo/flamingo-5.2.1/viewer/src/main/webapp/WEB-INF/xsl/print/ \
+    && cp /opt/web/A0_Portrait.xsl /opt/flamingo/flamingo-5.2.1/viewer/src/main/webapp/WEB-INF/xsl/print/ \
+    && cp /opt/web/A3_Landscape.xsl /opt/flamingo/flamingo-5.2.1/viewer/src/main/webapp/WEB-INF/xsl/print/ \
+    && cp /opt/web/A3_Portrait.xsl /opt/flamingo/flamingo-5.2.1/viewer/src/main/webapp/WEB-INF/xsl/print/ \
+    && cp /opt/web/A4_Landscape.xsl /opt/flamingo/flamingo-5.2.1/viewer/src/main/webapp/WEB-INF/xsl/print/ \
+    && cp /opt/web/A4_Portrait.xsl /opt/flamingo/flamingo-5.2.1/viewer/src/main/webapp/WEB-INF/xsl/print/ \
+    && cp /opt/web/A5_Landscape.xsl /opt/flamingo/flamingo-5.2.1/viewer/src/main/webapp/WEB-INF/xsl/print/ \
+    && cp /opt/web/A5_Portrait.xsl /opt/flamingo/flamingo-5.2.1/viewer/src/main/webapp/WEB-INF/xsl/print/ \
+    && touch /opt/flamingo/flamingo-5.2.1/viewer-admin/src/main/resources/git.properties \
+    && mkdir /opt/flamingo/flamingo-5.2.1/viewer/src/main/resources \
+    && touch /opt/flamingo/flamingo-5.2.1/viewer/src/main/resources/git.properties \
+    && cd /opt/flamingo/flamingo-5.2.1 \
+    && mvn install -Dmaven.test.skip=true
+
 
 FROM ubuntu:18.04
 
@@ -35,28 +57,18 @@ RUN mkdir -p /usr/share/tomcat8/lib && \
 
 # Replace tomcat configuration
 COPY config/* /opt/
-COPY web /opt/
 
-COPY --from=builder /opt/jmx_prometheus_javaagent.jar /usr/share/tomcat8/lib/
+COPY --from=metrics /opt/jmx_prometheus_javaagent.jar /usr/share/tomcat8/lib/
 COPY prometheus.yaml /usr/share/tomcat8/lib/
 
 # Download Flamingo
 RUN curl "http://central.maven.org/maven2/com/sun/mail/javax.mail/1.5.2/javax.mail-1.5.2.jar" > /usr/share/tomcat8/lib/javax.mail-1.5.2.jar && \
     curl "http://central.maven.org/maven2/org/postgresql/postgresql/42.2.5/postgresql-42.2.5.jar" > /usr/share/tomcat8/lib/postgresql-42.2.5.jar && \
     curl "https://archive.apache.org/dist/lucene/solr/4.9.1/solr-4.9.1.zip" > /opt/solr-4.9.1.zip && \
-    mkdir -p /usr/share/tomcat8/webapps/ && \
-    curl "https://repo.b3p.nl/nexus/content/repositories/releases/org/flamingo-mc/viewer/5.2.1/viewer-5.2.1.war" > /usr/share/tomcat8/webapps/viewer.war && \
-    curl "https://repo.b3p.nl/nexus/content/repositories/releases/org/flamingo-mc/viewer-admin/5.2.1/viewer-admin-5.2.1.war" > /usr/share/tomcat8/webapps/viewer-admin.war
+    mkdir -p /usr/share/tomcat8/webapps/
 
-RUN unzip -d /opt/viewer /usr/share/tomcat8/webapps/viewer.war && \
-    cp /opt/login.jsp /opt/viewer/ && \
-    cp /opt/ev_sk_splash.jpg /opt/viewer/resources/images/ && \
-    cp /opt/logo.png /opt/viewer/WEB-INF/xsl/print/ && \
-    cd /opt/viewer && \
-    zip -r /opt/viewer.zip . && \
-    cp /opt/viewer.zip /usr/share/tomcat8/webapps/viewer.war && \
-    rm /opt/viewer.zip && \
-    rm -rf /opt/viewer
+COPY --from=builder /opt/flamingo/flamingo-5.2.1/viewer/target/viewer-5.2.1.war /usr/share/tomcat8/webapps/viewer.war
+COPY --from=builder /opt/flamingo/flamingo-5.2.1/viewer-admin/target/viewer-admin-5.2.1.war /usr/share/tomcat8/webapps/viewer-admin.war
 
 RUN unzip /opt/solr-4.9.1.zip && \
     cp -r /solr-4.9.1/dist/ /opt/ && \
