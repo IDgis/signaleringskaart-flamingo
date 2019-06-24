@@ -21,7 +21,7 @@ RUN curl -L "https://github.com/flamingo-geocms/flamingo/archive/v5.2.1.zip" > /
     && cp /opt/web/A5_Landscape.xsl /opt/flamingo/flamingo-5.2.1/viewer/src/main/webapp/WEB-INF/xsl/print/ \
     && cp /opt/web/A5_Portrait.xsl /opt/flamingo/flamingo-5.2.1/viewer/src/main/webapp/WEB-INF/xsl/print/ \
     && touch /opt/flamingo/flamingo-5.2.1/viewer-admin/src/main/resources/git.properties \
-    && mkdir /opt/flamingo/flamingo-5.2.1/viewer/src/main/resources \
+    && mkdir -p /opt/flamingo/flamingo-5.2.1/viewer/src/main/resources \
     && touch /opt/flamingo/flamingo-5.2.1/viewer/src/main/resources/git.properties \
     && cd /opt/flamingo/flamingo-5.2.1 \
     && mvn install -Dmaven.test.skip=true
