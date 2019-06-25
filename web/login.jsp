@@ -77,7 +77,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
       }
       .panel-default > .panel-heading {
         color: #fff;
-        background-color: #ff9500;
+        background-color: #005b7f;
         border-color: #ddd;
       }
       .panel-heading {
@@ -139,7 +139,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
       }
       .btn-success {
         color: #fff;
-        background-color: #5cb85c;
+        background-color: #48a842;
         border-color: #4cae4c;
       }
       .btn{
