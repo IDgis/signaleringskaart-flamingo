@@ -82,13 +82,15 @@ div.olLayerDiv {
 }
 
 div.olControlMousePosition {
-    bottom: 10px;
+    position: fixed !important;
+    bottom: 0;
     right: 3px;
     display: block;
     position: absolute;
     font-family: Arial;
     font-size: smaller;
     left: calc(50% - (114px / 2));
+    color: white;
 }
 
 .olControlOverviewMapContainer {
