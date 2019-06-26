@@ -20,6 +20,7 @@ RUN curl -L "https://github.com/flamingo-geocms/flamingo/archive/v5.2.1.zip" > /
     && cp /opt/web/A4_Portrait.xsl /opt/flamingo/flamingo-5.2.1/viewer/src/main/webapp/WEB-INF/xsl/print/ \
     && cp /opt/web/A5_Landscape.xsl /opt/flamingo/flamingo-5.2.1/viewer/src/main/webapp/WEB-INF/xsl/print/ \
     && cp /opt/web/A5_Portrait.xsl /opt/flamingo/flamingo-5.2.1/viewer/src/main/webapp/WEB-INF/xsl/print/ \
+    && cp /opt/web/style.jsp /opt/flamingo/flamingo-5.2.1/viewer/src/main/webapp/viewer-html/common/openlayers/theme/default/ \
     && touch /opt/flamingo/flamingo-5.2.1/viewer-admin/src/main/resources/git.properties \
     && mkdir -p /opt/flamingo/flamingo-5.2.1/viewer/src/main/resources \
     && touch /opt/flamingo/flamingo-5.2.1/viewer/src/main/resources/git.properties \
