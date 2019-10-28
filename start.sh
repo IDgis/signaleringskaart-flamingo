@@ -1,7 +1,6 @@
 #!/bin/bash
 
 envsubst < /opt/server.xml > /usr/local/tomcat/conf/server.xml
-envsubst < /opt/tomcat-users.xml > /usr/local/tomcat/conf/tomcat-users.xml
 
 envsubst < /opt/viewer.xml > /usr/local/tomcat/conf/Catalina/localhost/viewer.xml
 envsubst < /opt/viewer-admin.xml > /usr/local/tomcat/conf/Catalina/localhost/viewer-admin.xml
