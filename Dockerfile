@@ -8,7 +8,7 @@ RUN curl "http://central.maven.org/maven2/io/prometheus/jmx/jmx_prometheus_javaa
 FROM maven:3.6-jdk-8 as builder
 COPY web /opt/web
 
-ARG FLAMINGO_VERSION=5.2.1
+ARG FLAMINGO_VERSION=5.4.6
 
 RUN curl -L "https://github.com/flamingo-geocms/flamingo/archive/v${FLAMINGO_VERSION}.zip" > /opt/flamingo.zip \
     && unzip -d /opt/flamingo /opt/flamingo.zip \
@@ -32,9 +32,9 @@ RUN curl -L "https://github.com/flamingo-geocms/flamingo/archive/v${FLAMINGO_VER
 
 
 FROM tomcat:9.0-jre8
-LABEL maintainer="Kevin van den Bosch<kevin.van.den.bosch@idgis.nl>"
+LABEL maintainer="Kevin van den Bosch <kevin.van.den.bosch@idgis.nl>"
 
-ARG FLAMINGO_VERSION=5.2.1
+ARG FLAMINGO_VERSION=5.4.6
 
 # Install software
 RUN apt-get update \
@@ -47,8 +47,7 @@ RUN apt-get update \
 
 # Prepare tomcat environment for Flamingo
 RUN mkdir -p /usr/local/tomcat/conf/Catalina/localhost \
-    && mkdir -p /opt/flamingo_data \
-    && ln -s /tmp /usr/local/tomcat/temp
+    && mkdir -p /opt/flamingo_data
 
 # Replace tomcat configuration
 COPY config/* /opt/
