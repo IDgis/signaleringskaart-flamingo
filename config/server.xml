@@ -134,21 +134,6 @@
 
             <Host name="localhost" copyXML="true" appBase="webapps"
                   unpackWARs="true" autoDeploy="true">
-                <!--
-                <Context path="/viewer-admin">
-                    <Parameter name="flamingo.data.dir" value="/opt/flamingo_data" override="false"/>
-                    <Parameter name="flamingo.solr.url" value="http://${SOLR_URL}/solr/" override="false"/>
-                    <Parameter name="flamingo.solr.schedule" value="0 1 * ? * *" override="false"/>
-                    <Parameter name="flamingo.solr.setup" value="true" override="false"/>
-                </Context>
-                <Context path="/viewer">
-                    <Parameter name="flamingo.data.dir" value="/opt/flamingo_data" override="false"/>
-                    <Parameter name="flamingo.solr.url" value="http://${SOLR_URL}/solr/" override="false"/>
-                    <Parameter name="flamingo.solr.schedule" value="0 1 * ? * *" override="false"/>
-                    <Parameter name="flamingo.solr.setup" value="false" override="false"/>
-                </Context>
-                -->
-
                 <!-- SingleSignOn valve, share authentication between web applications
                      Documentation at: /docs/config/valve.html -->
                 <!--
@@ -168,6 +153,9 @@
                        proxiesHeader="x-forwarded-by"
                        protocolHeader="x-forwarded-proto"
                        />
+                <Valve className="org.apache.catalina.valves.ErrorReportValve"
+                       showReport="false"
+                       showServerInfo="false" />
 
             </Host>
         </Engine>

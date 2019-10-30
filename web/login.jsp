@@ -22,6 +22,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     <meta name="teststring" content="<title>Inloggen</title>">
     <title>Inloggen</title>
     <style>
+      * {
+        box-sizing: border-box;
+      }
       html {
         width: 100%;
         height: 100%;
@@ -40,7 +43,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         .panel-centered {
           position: absolute;
           width: 300px;
-          height: 225px;
+          height: 250px;
           left: 20px;
           top: 12vw;
           font-family: 'Open Sans', 'Helvetica Neue', helvetica, arial, verdana, sans-serif;
@@ -59,7 +62,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         .panel-centered {
           position: absolute;
           width: 300px;
-          height: 225px;
+          height: 250px;
           left: calc((100vw - 1335px) / 2);
           top: 164px;
           font-family: 'Open Sans', 'Helvetica Neue', helvetica, arial, verdana, sans-serif;
@@ -142,7 +145,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         background-color: #48a842;
         border-color: #4cae4c;
       }
-      .btn{
+      .btn {
         margin-bottom: 0;
         font-weight: 400;
         text-align: center;
@@ -156,8 +159,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         background-image: none;
         border: 1px solid transparent;
       }
-      * {
-        box-sizing: border-box;
+      .password-reset {
+        float: right;
+        margin-top: 15px;
       }
     </style>
   </head>
@@ -178,6 +182,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
             <button class="btn btn-lg btn-success btn-block" type="submit" name="submit">Login</button>
           </fieldset>
         </form>
+        <div class="password-reset">
+          <a href="/ui/reset-password">Wachtwoord vergeten</a>
+        </div>
       </div>
     </div>
   </body>
