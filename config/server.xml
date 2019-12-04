@@ -153,9 +153,6 @@
                        proxiesHeader="x-forwarded-by"
                        protocolHeader="x-forwarded-proto"
                        />
-                <Valve className="org.apache.catalina.valves.ErrorReportValve"
-                       showReport="false"
-                       showServerInfo="false" />
 
             </Host>
         </Engine>
