@@ -3,7 +3,7 @@ RUN apt-get update \
     && apt-get install -y --no-install-recommends \
         curl \
     && rm -rf /var/lib/apt/lists/*
-RUN curl "http://central.maven.org/maven2/io/prometheus/jmx/jmx_prometheus_javaagent/0.11.0/jmx_prometheus_javaagent-0.11.0.jar" > /opt/jmx_prometheus_javaagent.jar
+RUN curl --insecure "https://repo1.maven.org/maven2/io/prometheus/jmx/jmx_prometheus_javaagent/0.11.0/jmx_prometheus_javaagent-0.11.0.jar" > /opt/jmx_prometheus_javaagent.jar
 
 FROM maven:3.6-jdk-8 as builder
 COPY web /opt/web
@@ -53,8 +53,8 @@ RUN mkdir -p /usr/local/tomcat/conf/Catalina/localhost \
 COPY config/* /opt/
 
 #Download Flamingo
-RUN curl "http://central.maven.org/maven2/com/sun/mail/javax.mail/1.5.2/javax.mail-1.5.2.jar" > /usr/local/tomcat/lib/javax.mail-1.5.2.jar && \
-    curl "http://central.maven.org/maven2/org/postgresql/postgresql/42.2.5/postgresql-42.2.5.jar" > /usr/local/tomcat/lib/postgresql-42.2.5.jar && \
+RUN curl "https://repo1.maven.org/maven2/com/sun/mail/javax.mail/1.5.2/javax.mail-1.5.2.jar" > /usr/local/tomcat/lib/javax.mail-1.5.2.jar && \
+    curl "https://repo1.maven.org/maven2/org/postgresql/postgresql/42.2.9/postgresql-42.2.9.jar" > /usr/local/tomcat/lib/postgresql-42.2.9.jar && \
     curl "https://archive.apache.org/dist/lucene/solr/4.9.1/solr-4.9.1.zip" > /opt/solr-4.9.1.zip
 
 COPY --from=builder /opt/flamingo/flamingo-${FLAMINGO_VERSION}/viewer/target/viewer-${FLAMINGO_VERSION}.war /usr/local/tomcat/webapps/viewer.war

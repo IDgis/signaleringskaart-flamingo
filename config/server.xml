@@ -50,7 +50,7 @@
                 password="${FLAMINGO_PASSWORD}"
                 driverClassName="org.postgresql.Driver"
                 url="jdbc:postgresql://${PG_HOST}:${PG_PORT}/${FLAMINGO_DB}"
-                maxTotal="200"
+                maxTotal="${MAX_DB_CONNECTIONS}"
                 validationQuery="select 1"
                 timeBetweenEvictionRunsMillis="30000"
                 minEvictableIdleTimeMillis="5000"
