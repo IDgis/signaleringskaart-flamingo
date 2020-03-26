@@ -10,7 +10,7 @@ COPY web /opt/web
 
 ARG FLAMINGO_VERSION=5.4.6
 
-RUN curl --insecure "https://github.com/flamingo-geocms/flamingo/archive/v${FLAMINGO_VERSION}.zip" > /opt/flamingo.zip \
+RUN curl -L "https://github.com/flamingo-geocms/flamingo/archive/v${FLAMINGO_VERSION}.zip" > /opt/flamingo.zip \
     && unzip -d /opt/flamingo /opt/flamingo.zip \
     && cp /opt/web/login.jsp /opt/flamingo/flamingo-${FLAMINGO_VERSION}/viewer/src/main/webapp/ \
     && cp /opt/web/ev_sk_splash.jpg /opt/flamingo/flamingo-${FLAMINGO_VERSION}/viewer/src/main/webapp/resources/images/ \
@@ -53,9 +53,9 @@ RUN mkdir -p /usr/local/tomcat/conf/Catalina/localhost \
 COPY config/* /opt/
 
 #Download Flamingo
-RUN curl --insecure "https://repo1.maven.org/maven2/com/sun/mail/javax.mail/1.5.2/javax.mail-1.5.2.jar" > /usr/local/tomcat/lib/javax.mail-1.5.2.jar && \
-    curl --insecure "https://repo1.maven.org/maven2/org/postgresql/postgresql/42.2.9/postgresql-42.2.9.jar" > /usr/local/tomcat/lib/postgresql-42.2.9.jar && \
-    curl --insecure "https://archive.apache.org/dist/lucene/solr/4.9.1/solr-4.9.1.zip" > /opt/solr-4.9.1.zip
+RUN curl "https://repo1.maven.org/maven2/com/sun/mail/javax.mail/1.5.2/javax.mail-1.5.2.jar" > /usr/local/tomcat/lib/javax.mail-1.5.2.jar && \
+    curl "https://repo1.maven.org/maven2/org/postgresql/postgresql/42.2.9/postgresql-42.2.9.jar" > /usr/local/tomcat/lib/postgresql-42.2.9.jar && \
+    curl "https://archive.apache.org/dist/lucene/solr/4.9.1/solr-4.9.1.zip" > /opt/solr-4.9.1.zip
 
 COPY --from=builder /opt/flamingo/flamingo-${FLAMINGO_VERSION}/viewer/target/viewer-${FLAMINGO_VERSION}.war /usr/local/tomcat/webapps/viewer.war
 COPY --from=builder /opt/flamingo/flamingo-${FLAMINGO_VERSION}/viewer-admin/target/viewer-admin-${FLAMINGO_VERSION}.war /usr/local/tomcat/webapps/viewer-admin.war
