@@ -38,7 +38,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
           background-size: contain;
           width: 100%;
           height: 0;
-          padding-top: 68.76%; /* (img-height / img-width * container-width) => (1316 / 1914 * 100) */
+          padding-top: 70.22%; /* (img-height / img-width * container-width) => (1344 / 1914 * 100) */
         }
         .panel-centered {
           position: absolute;
