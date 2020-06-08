@@ -148,14 +148,10 @@
                        pattern="%h %l %u %t &quot;%r&quot; %s %b" />
 
                 <Valve className="org.apache.catalina.valves.RemoteIpValve"
-                       internalProxies="172\.[0-9]+\.[0-9]+\.[0-9]+"
-                       remoteIpHeader="x-forwarded-for"
-                       proxiesHeader="x-forwarded-by"
-                       protocolHeader="x-forwarded-proto"
-                       />
-                <Valve className="org.apache.catalina.valves.ErrorReportValve"
-                       showReport="false"
-                       showServerInfo="false" />
+                       internalProxies="172\.[0-9]+\.[0-9]+\.[0-9]+" remoteIpHeader="x-forwarded-for"
+                       proxiesHeader="x-forwarded-by" protocolHeader="x-forwarded-proto"/>
+                <Valve className="org.apache.catalina.valves.ErrorReportValve" showReport="${DEBUG}"
+                       showServerInfo="${DEBUG}" />
 
             </Host>
         </Engine>

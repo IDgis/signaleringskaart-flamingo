@@ -1,7 +1,7 @@
 FROM ubuntu:18.04 as builder
 
-ARG FLAMINGO_VIEWER_VERSION=5.6.0
-ARG FLAMINGO_ADMIN_VERSION=5.4.8
+ARG FLAMINGO_VIEWER_VERSION=5.6.1
+ARG FLAMINGO_ADMIN_VERSION=5.6.1
 
 COPY web /opt/web
 RUN apt-get update \
@@ -31,7 +31,7 @@ RUN apt-get update \
     && zip -r /opt/viewer.war *
 
 
-FROM tomcat:9.0-jre8
+FROM tomcat:9.0-jre11
 LABEL maintainer="Kevin van den Bosch <kevin.van.den.bosch@idgis.nl>"
 
 # Install software

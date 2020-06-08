@@ -2,6 +2,7 @@
 <!-- crossContext="true" is required to enable the viewer-admin to load the
   components.json file and component config javascript sources from the viewer -->
 <Context antiResourceLocking="true" crossContext="true" path="/viewer-admin">
+    <Loader delegate="true"/>
     <Parameter name="componentregistry.path" override="false" value="/viewer-html/components"/>
 
     <Parameter name="flamingo.data.dir" value="/opt/flamingo_data" override="false" />
