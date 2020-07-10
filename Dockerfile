@@ -51,6 +51,7 @@ COPY config/* /opt/
 # Download Flamingo tools
 RUN wget -O /usr/local/tomcat/lib/javax.mail-1.5.2.jar "https://repo1.maven.org/maven2/com/sun/mail/javax.mail/1.5.2/javax.mail-1.5.2.jar" \
     && wget -O /usr/local/tomcat/lib/postgresql-42.2.9.jar "https://repo1.maven.org/maven2/org/postgresql/postgresql/42.2.9/postgresql-42.2.9.jar" \
+    && wget -O /usr/local/tomcat/lib/javax.activation-1.2.0.jar "https://repo1.maven.org/maven2/com/sun/activation/javax.activation/1.2.0/javax.activation-1.2.0.jar" \
     && wget -O /opt/solr-4.9.1.zip "https://archive.apache.org/dist/lucene/solr/4.9.1/solr-4.9.1.zip"
 
 COPY --from=builder /opt/viewer.war /usr/local/tomcat/webapps/viewer.war
