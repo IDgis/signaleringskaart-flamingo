@@ -43,7 +43,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         .panel-centered {
           position: absolute;
           width: 300px;
-          height: 250px;
+          height: 275px;
           left: 20px;
           top: 12vw;
           font-family: 'Open Sans', 'Helvetica Neue', helvetica, arial, verdana, sans-serif;
@@ -62,7 +62,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         .panel-centered {
           position: absolute;
           width: 300px;
-          height: 250px;
+          height: 275px;
           left: calc((100vw - 1335px) / 2);
           top: 164px;
           font-family: 'Open Sans', 'Helvetica Neue', helvetica, arial, verdana, sans-serif;
@@ -163,6 +163,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         float: right;
         margin-top: 15px;
       }
+      .request-account {
+        float: right;
+        margin-top: 10px;
+      }
     </style>
   </head>
   <body>
@@ -184,6 +188,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         </form>
         <div class="password-reset">
           <a href="/ui/reset-password">Wachtwoord vergeten</a>
+        </div>
+        <div class="request-account">
+          <a href="mailto:info@ev-signaleringskaart.nl">Account aanvragen</a>
         </div>
       </div>
     </div>
