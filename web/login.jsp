@@ -44,9 +44,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
           position: absolute;
           width: 300px;
           height: 275px;
-          left: 20px;
-          top: 12vw;
+          left: 80px;
+          top: 6vw;
           font-family: 'Open Sans', 'Helvetica Neue', helvetica, arial, verdana, sans-serif;
+          transform: scale(0.7);
         }
       }
       @media screen and (min-width: 1375px) {
@@ -63,9 +64,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
           position: absolute;
           width: 300px;
           height: 275px;
-          left: calc((100vw - 1335px) / 2);
-          top: 164px;
+          left: calc((115vw - 1335px) / 2);
+          top: 100px;
           font-family: 'Open Sans', 'Helvetica Neue', helvetica, arial, verdana, sans-serif;
+          transform: scale(0.8);
         }
       }
       .panel-default {
