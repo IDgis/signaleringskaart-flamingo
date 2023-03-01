@@ -31,7 +31,7 @@ RUN apt-get update \
     && zip -r /opt/viewer.war *
 
 
-FROM tomcat:9.0-jre11
+FROM tomcat:9.0.52-jre11
 LABEL maintainer="Kevin van den Bosch <kevin.van.den.bosch@idgis.nl>"
 
 # Install software
