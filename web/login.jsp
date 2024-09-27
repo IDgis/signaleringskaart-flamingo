@@ -44,7 +44,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
           position: absolute;
           width: 300px;
           height: 275px;
-          left: 80px;
+          left: 50%;
           top: 6vw;
           font-family: 'Open Sans', 'Helvetica Neue', helvetica, arial, verdana, sans-serif;
           transform: scale(0.7);
@@ -64,7 +64,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
           position: absolute;
           width: 300px;
           height: 275px;
-          left: calc((115vw - 1335px) / 2);
+          left: 50%;
           top: 100px;
           font-family: 'Open Sans', 'Helvetica Neue', helvetica, arial, verdana, sans-serif;
           transform: scale(0.8);
